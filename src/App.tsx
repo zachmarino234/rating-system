@@ -9,14 +9,14 @@ import Set from "./svg/icons/Set";
 function App() {
   const [title, setTitle] = useState('');
 
-  const handleChange = (event) => {
-    // Update the state with the new input value
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
   return (
     <div className="flex flex-col gap-5 bg-[#005c9f] p-10 rounded-xl">
       <p>Here is my rating of...</p>
+
       <input
         type="text"
         id="simple-textbox"
@@ -25,6 +25,7 @@ function App() {
         placeholder="Enter show title..."
         className="text-3xl font-bold text-white"
       />
+
       <div className="flex flex-row gap-24">
         <Glyph>
           <Acting />
@@ -42,6 +43,7 @@ function App() {
           <Impact />
         </Glyph>
       </div>
+      
       <p className="self-end">Rating system created by Zach Marino</p>
     </div>
   );

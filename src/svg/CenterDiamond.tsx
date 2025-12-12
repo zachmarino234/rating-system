@@ -7,7 +7,7 @@ const COLORS = {
     indifferent: "#D5D5D4"
 };
 
-const STATES = ["good", "mediocre", "bad", "indifferent"];
+const STATES = ["good", "mediocre", "bad", "indifferent"] as const;
 
 interface DiamondProps {
     children: React.ReactNode;

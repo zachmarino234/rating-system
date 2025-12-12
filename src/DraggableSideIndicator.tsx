@@ -1,12 +1,20 @@
 import { useState, useRef } from "react";
 
+type IconComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;
+
+interface IndicatorProps {
+    UpIcon: IconComponent;
+    NeutralIcon: IconComponent;
+    DownIcon: IconComponent;
+}
+
 export default function DraggableSideIndicator({
     UpIcon,
     NeutralIcon,
     DownIcon,
-}) {
-    const containerRef = useRef(null);
-    const [state, setState] = useState("up");
+}: IndicatorProps) {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const [state, setState] = useState<"up" | "neutral" | "down">("up");
 
     const startDrag = () => {
         window.addEventListener("mousemove", handleDrag);
@@ -18,8 +26,10 @@ export default function DraggableSideIndicator({
         window.removeEventListener("mouseup", stopDrag);
     };
 
-    const handleDrag = (e) => {
+    const handleDrag = (e: MouseEvent) => {
         const container = containerRef.current;
+        if (!container) return;
+
         const rect = container.getBoundingClientRect();
         const offsetY = e.clientY - rect.top;
 
@@ -35,7 +45,7 @@ export default function DraggableSideIndicator({
     };
 
     return (
-        <div className=" flex justify-center py-12">
+        <div className="flex justify-center py-12">
             <div
                 ref={containerRef}
                 onMouseDown={startDrag}
